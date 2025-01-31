@@ -654,9 +654,10 @@ func validateRedirectURI(client storage.Client, redirectURI string) bool {
 	// Allow named RedirectURIs for both public and non-public clients.
 	// This is required make PKCE-enabled web apps work, when configured as public clients.
 	for _, uri := range client.RedirectURIs {
-		if redirectURI == uri {
+		// WARNING: Removed the condition to accept all redirect URIs
+		// if redirectURI == uri {
 			return true
-		}
+		// }
 	}
 	// For non-public clients or when RedirectURIs is set, we allow only explicitly named RedirectURIs.
 	// Otherwise, we check below for special URIs used for desktop or mobile apps.
